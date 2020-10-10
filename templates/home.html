@@ -1,13 +1,18 @@
-<!DOCTYPE html>
+{% load static%}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Boards</title>
+    <link rel="stylesheet" href="{%static 'css/bootstrap.min.css'%}">
 </head>
 <body>
-<h1><mark>Boards</mark></h1>
-<table border="1">
-    <thead>
+<div class="container">
+<ol class="breadcrumb my-4">
+    <li class="breadcrumb-item active">Boards</li>
+</ol>
+
+<table class="table">
+    <thead class="thead-dark">
         <tr>
             <th>Board</th>
             <th>Post</th>
@@ -18,7 +23,9 @@
             {% for board in boards%}
             
             <tr>
-                <td>{{board.name}}</td>
+                <td>{{board.name}}
+                    <small class="text-muted d-block">{{board.description}}</small>
+                </td>
                 <td>null</td>
                 <td>null</td>
                 <td>null</td>
@@ -30,7 +37,7 @@
  
 
 
-
+</div>
 
 
 
