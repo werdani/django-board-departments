@@ -1,35 +1,35 @@
-{% extends 'base.html'%}
-{%block title%}Boards{%endblock%}
+{% extends 'base.html' %}
+{%block title%}Boards{% endblock%}
 
-{% block bread%}
-<li class="breadcrumb-item active">Boards</li>
+{% block breadcrumb%}
+    <li class="breadcrumb-item active">Boards</li>
+{% endblock%}
 
-{%endblock%}
 {% block content %}
-<table class="table">
-    <thead class="thead-dark">
-        <tr>
-            <th>Board</th>
-            <th>Post</th>
-            <th>Topic</th>
-            <th>Last post</th>
-        </tr>
-        <tbody>
-            {% for board in boards%}
-            
+    <table class="table">
+        <thead class="thead-dark">
             <tr>
-                <td><a href="{% url 'board_topic' board.pk%} " >{{board.name}}</a>
-                    <small class="text-muted d-block">{{board.description}}</small>
-                </td>
-                <td>null</td>
-                <td>null</td>
-                <td>null</td>
+                <th>Board</th>
+                <th>Post</th>
+                <th>Topic</th>
+                <th>Last post</th>
             </tr>
-            {% endfor%}
-        </tbody>
-    </thead>
-</table>
+            <tbody>
+                {% for board in boards%}
+            
+                <tr>
+                    <td><a href="{% url 'board_topic' board.pk%} " >{{board.name}}</a>
+                        <small class="text-muted d-block">{{board.description}}</small>
+                    </td>
+                    <td>null</td>
+                    <td>null</td>
+                    <td>null</td>
+                </tr>
+                {% endfor%}
+            </tbody>
+        </thead>
+    </table>
  
-{%endblock%}
+{% endblock%}
 
 

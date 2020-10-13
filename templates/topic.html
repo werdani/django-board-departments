@@ -1,11 +1,37 @@
-{% extends 'base.html'%}
-{%block title%}{{board.name}}{%endblock%}
+{% extends 'base.html' %}
+
+    {%block title%}{{board.name}}{%endblock%}
     
-{% block bread%}
+{% block breadcrumb%}
     <li class="breadcrumb-item "><a href="{% url 'home'%}">Boards</a></li>
     <li class="breadcrumb-item active">{{board.name}}</li>
-{%endblock%}
+{% endblock%}
 
 {% block content %}
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th>Topic</th>
+            <th>Created by</th>
+            <th>Posts</th>
+            <th>Views</th>
+            <th>Created data</th>
+        </tr>
+        <tbody>
+            {% for topic in board.topics.all%}
+        
+            <tr>
+                <td>{{ topic.subject}}</td>
+                <td>{{ topic.created_by.username}}</td>
+                <td>null</td>
+                <td>null</td>
+                <td>{{ topic.created_dt}}</td>
+            </tr>
+            {% endfor%}
+        </tbody>
+    </thead>
+</table><br><br>
+<a href="{% url 'new_topic' board.id%} " class="btn btn-primary">New topic</a>
 
-{%endblock%}
+
+{% endblock%}
