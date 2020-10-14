@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
      #my apps
     'boards',
+    #libraries
+    'widget_tweaks'
 
 ]
 
