@@ -2,6 +2,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.http import Http404, HttpResponse
 from .models import Board,Topic,Post
 from django.contrib.auth.models import User
+from .forms import NewTopic
 
 # Create your views here.
 
@@ -31,24 +32,23 @@ def board_topic(request,id):
     return render(request,'topic.html',{'board':board})
 
 def new_topic(request,id):
-    board = Board.objects.get(pk=id)
-    if request.method == 'POST':
-        subject = request.POST['subject']
-        message = request.POST['message']
-        print(subject,message)
-        user = User.objects.first()
-        topic = Topic.objects.create(
-            subject = subject,
-            board = board,
-            created_by= user,
-        )
-        post = Post.objects.create(
-            message = message,
-            topic = topic,
-            created_by= user,
+    board = get_object_or_404(Board,pk=id)
+    form = NewTopic()
+    user = User.objects.first()
+    if request.method == "POST":
+        form = NewTopic(request.POST)
+        if form.is_valid():
+            topic= form.save(commit=False)
+            topic.board= board
+            topic.created_by = user
+            topic.save()
 
-        )
-        return redirect('board_topic',id=board.pk)
-
-
-    return render(request,'new_topic.html',{'board':board})
+            post = Post.objects.create(
+                message = form.cleaned_data.get('message'),
+                created_by = user,
+                topic=topic
+            )
+            return redirect('board_topic',id=board.pk)
+    else:
+        form = NewTopic()
+    return render(request,'new_topic.html',{'board':board,'form':form})
