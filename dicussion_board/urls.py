@@ -19,4 +19,5 @@ from django.urls import path,include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include('boards.urls')), # to crate url in app boards and i will create url for any app her.
+    path('',include('accounts.urls')),# this is a new link for a new app .
 ]

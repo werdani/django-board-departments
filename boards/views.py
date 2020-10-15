@@ -52,3 +52,4 @@ def new_topic(request,id):
     else:
         form = NewTopic()
     return render(request,'new_topic.html',{'board':board,'form':form})
+

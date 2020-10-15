@@ -6,6 +6,23 @@
      <link rel="stylesheet" href="{%static 'css/bootstrap.min.css'%}">
 </head>
 <body>
+{% block body%}
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="{% url 'home'%}">Django Boards</a>
+        <button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#mainMenu" aria-controls="mainMenu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="mainMenu">
+            <ul class="navebar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Welcome {{user.username}}</a>
+
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
 <div class="container">
 <ol class="breadcrumb my-4">
     {% block breadcrumb%}
@@ -19,6 +36,6 @@
 </div>
 
 
-
+{% endblock%}
 </body>
 </html>
