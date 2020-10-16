@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}change password succssful{% endblock %}
+
+{% block breadcrumb %}
+  <li class="breadcrumb-item "><a href="{% url 'password_change_done' %}">change password done</a> </li>
+  <li class="breadcrumb-item active">success</li>
+{% endblock %}
+
+{% block content %}
+  <div class="alert alert-success" role="alert">
+     your password has ben change:)
+  </div>
+   <button type="submit" ><a href="{% url 'home'%}">return to home</a></button>
+{% endblock %}
