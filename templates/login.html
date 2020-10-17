@@ -16,6 +16,7 @@
           <div class="card-body">
             <h2 class="card-title">Log In</h2>
             <form method="post" novalidate>
+              <input type="hidden" name="next" value="{{ next }}">
               {% csrf_token %}
               {% include 'includes/form.html' %}
               <button type="submit" class="btn btn-primary btn-block">Log in</button>
