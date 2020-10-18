@@ -57,3 +57,7 @@ def new_topic(request,id):
         form = NewTopic()
     return render(request,'new_topic.html',{'board':board,'form':form})
 
+def topics_posts(request,id,topic_id):
+    topic = get_object_or_404(Topic,board__pk =id,pk=topic_id)
+
+    return render(request,'topic_posts.html',{'topic':topic})
