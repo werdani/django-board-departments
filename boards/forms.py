@@ -1,5 +1,5 @@
 from django import forms
-from .models import Topic
+from .models import Topic,Post
 
 class NewTopic(forms.ModelForm):
     message = forms.CharField(widget=forms.Textarea(attrs={'rows':5,'placeholder':'write her '}),max_length=4000,
@@ -7,3 +7,10 @@ class NewTopic(forms.ModelForm):
     class Meta:
         model=Topic
         fields=['subject','message']
+
+
+
+class PostForm(forms.ModelForm):
+    class Meta:
+        model = Post
+        fields=['message',]

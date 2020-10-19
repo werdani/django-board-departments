@@ -4,6 +4,7 @@ from .models import Board,Topic,Post
 from django.contrib.auth.models import User
 from .forms import NewTopic
 from django.contrib.auth.decorators import login_required
+from boards.forms import PostForm
 
 # Create your views here.
 
@@ -61,3 +62,19 @@ def topics_posts(request,id,topic_id):
     topic = get_object_or_404(Topic,board__pk =id,pk=topic_id)
 
     return render(request,'topic_posts.html',{'topic':topic})
+
+@login_required
+def reply_topic(request,id,topic_id):
+    topic = get_object_or_404(Topic,board__pk =id,pk=topic_id)
+    if request.method == "POST":
+        form = PostForm(request.POST)
+        if form.is_valid():
+            post= form.save(commit=False)
+            post.topic=topic
+            post.created_by = request.user
+            post.save()
+
+            return redirect('topics_posts',id=id,topic_id=topic_id)
+    else:
+        form = PostForm()
+    return render(request,'reply_topic.html',{'topic':topic,'form':form})

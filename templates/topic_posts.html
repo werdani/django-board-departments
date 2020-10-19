@@ -10,6 +10,10 @@
 
 {% block content %}
 
+<div class="mb-4">
+    <a href="{% url 'reply_topic' topic.board.pk  topic.pk %}" class="btn btn-primary">Reply</a>
+</div>
+
     {% for post in topic.posts.all %}
     <div class="row">
         <div class="col-2">
@@ -26,6 +30,7 @@
         </div>
 
     </div>
+
     {% endfor%}
-  
+
 {% endblock%}
