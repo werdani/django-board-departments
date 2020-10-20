@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from .forms import NewTopic
 from django.contrib.auth.decorators import login_required
 from boards.forms import PostForm
+from django.db.models import Count
 
 # Create your views here.
 
@@ -30,8 +31,9 @@ def board_topic(request,id):
     #except Board.DoesNotExist:
     #    raise Http404
     board = get_object_or_404(Board,pk=id) #this line = 5 line up.
+    topics = board.topics.order_by('-created_dt').annotate(comments=Count('posts'))
     
-    return render(request,'topic.html',{'board':board})
+    return render(request,'topic.html',{'board':board,'topics':topics})
 
 
 

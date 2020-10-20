@@ -18,13 +18,13 @@
             <th>Created data</th>
         </tr>
         <tbody>
-            {% for topic in board.topics.all%}
+            {% for topic in topics%}
         
             <tr>
                 <td><a href="{% url 'topics_posts' board.pk topic.pk %}">{{topic.subject}}</a></td>
                 <td>{{ topic.created_by.username}}</td>
-                <td>null</td>
-                <td>null</td>
+                <td>{{topic.comments}}</td>
+                <td></td>
                 <td>{{ topic.created_dt}}</td>
             </tr>
             {% endfor%}
