@@ -25,7 +25,7 @@
             <p>{{post.message}}</p>
             <p>{{post.created_dt}}</p>
             {% if post.created_by == user %}
-               <a href="#"><input type="button" value="Edit"></a>
+               <a href="{% url 'edit_post' post.topic.board.pk post.topic.pk post.pk%}"><input type="button" value="Edit"></a>
             {% endif%}
         </div>
 
