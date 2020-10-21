@@ -6,7 +6,7 @@ from .forms import NewTopic
 from django.contrib.auth.decorators import login_required
 from boards.forms import PostForm
 from django.db.models import Count
-from django.views.generic import UpdateView
+from django.views.generic import UpdateView , ListView
 from django.utils import timezone
 from django.utils.decorators import method_decorator
 
@@ -21,10 +21,17 @@ def home(request):
     html = '<br>'.join(board_name)
     return HttpResponse(html)
 
-'''
+
 def home(request):
     boards = Board.objects.all()
     return render(request,'home.html',{'boards':boards})
+
+'''
+
+class Boardlistview(ListView):
+    model = Board
+    context_object_name = 'boards'
+    template_name = 'home.html'
 
 def about(request):
     pass
