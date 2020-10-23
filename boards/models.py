@@ -21,6 +21,10 @@ class Topic(models.Model):
     created_by = models.ForeignKey(User,related_name='topics',on_delete=models.CASCADE)
     created_dt = models.DateTimeField(auto_now_add=True)
     views = models.PositiveBigIntegerField(default=0)
+    updated_by = models.ForeignKey(User,null=True,related_name='+',on_delete=models.CASCADE)
+    updated_dt = models.DateTimeField(null=True)
+
+
     def __str__(self):
         return self.subject
     
