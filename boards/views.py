@@ -9,6 +9,7 @@ from django.db.models import Count
 from django.views.generic import UpdateView , ListView
 from django.utils import timezone
 from django.utils.decorators import method_decorator
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 
 # Create your views here.
 
@@ -42,7 +43,15 @@ def board_topic(request,id):
     #    raise Http404
     board = get_object_or_404(Board,pk=id) #this line = 5 line up.
     topics = board.topics.order_by('-created_dt').annotate(comments=Count('posts'))
-    
+    page = request.GET.get('page',1)
+    paginator = Paginator(topics,20)
+    try:
+        topics = paginator.page(page)
+    except PageNotAnInteger:
+        topics = paginator.page(1)
+    except EmptyPage :
+        topics = paginator.page(paginator.num_pages)
+
     return render(request,'topic.html',{'board':board,'topics':topics})
 
 
